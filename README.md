@@ -1,163 +1,82 @@
-# SpotifyYoutubeML
+# Cross-Platform Music Performance Intelligence System
+> Spotify-YouTube 통합 분석을 통한 음악 콘텐츠 최적화 전략 수립
 
-Spotify-YouTube 통합 분석을 통한 음악 콘텐츠 최적화 전략 수립
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Problem Statement](#problem-statement)
+- [Hypothesis](#hypothesis)
+- [Methodology](#methodology)
+- [Results](#results)
+- [Technical Implementation](#technical-implementation)
+- [Business Impact](#business-impact)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
 
-프로젝트 개요
-음악 스트리밍 시장에서 플랫폼별 성과 지표가 분산되어 있어 콘텐츠 전략 수립이 어려운 문제를 해결하기 위해, Spotify와 YouTube 데이터를 통합 분석하여 히트곡 예측 모델과 크로스 플랫폼 최적화 전략을 제시한 프로젝트
-기간: [2025.03 - 2025. 04]
-역할: 데이터 분석가 / ML 엔지니어
-기술 스택: Python, scikit-learn, MLflow, Streamlit, SQLite, Pandas
+---
 
-1. 문제 정의 (Problem Definition)
-비즈니스 문제:
+## Project Overview
 
-음악 레이블사는 신곡 프로모션 시 어느 플랫폼에 예산을 집중해야 할지 의사결정 근거가 부족
-Spotify 스트림 수와 YouTube 조회수 간 상관관계가 불명확하여 크로스 플랫폼 시너지 효과 측정 불가
-히트곡의 특성(댄서빌리티, 에너지, 템포 등)을 사전에 파악하지 못해 A&R(Artist & Repertoire) 의사결정에 어려움
+Spotify와 YouTube 데이터를 통합 분석하여 히트곡 예측 모델과 크로스 플랫폼 최적화 전략을 제시한 프로젝트
+음악 스트리밍 시장에서 플랫폼별 성과 지표가 분산되어 있어 효과적인 콘텐츠 전략 수립이 어려운 문제를 해결하기 위함! 
 
-핵심 질문:
+### Key Features
+- 머신러닝 기반 스트림 수 예측 모델 (R² 0.847)
+- 히트곡 분류 모델 (Accuracy 92.3%)
+- 크로스 플랫폼 성과 상관관계 분석
+- 실시간 KPI 대시보드
+- MLflow 기반 실험 관리 시스템
 
-Spotify 스트림 수를 사전에 예측할 수 있는가?
-어떤 오디오 특성이 크로스 플랫폼 성공에 가장 큰 영향을 미치는가?
-공식 뮤직비디오 제작이 실제로 ROI가 있는가?
+### Tech Stack
+- **Language**: Python 3.8+
+- **ML Framework**: scikit-learn, Random Forest
+- **Experiment Tracking**: MLflow
+- **Data Processing**: Pandas, NumPy
+- **Visualization**: Matplotlib, Seaborn, Streamlit
+- **Database**: SQLite
+- **Statistical Analysis**: SciPy
 
-2. 가설 설정 (Hypothesis)
-가설 1: Spotify 스트림 수는 오디오 특성(댄서빌리티, 에너지, 발렌스)과 YouTube 참여도의 조합으로 70% 이상 예측 가능하다
-근거: 선행 연구에서 음악의 감성적 특성이 소비자 선호도와 강한 상관관계를 보임
+---
 
-가설 2: 공식 뮤직비디오가 있는 트랙은 없는 트랙 대비 평균 스트림 수가 30% 이상 높다
-근거: 시각적 콘텐츠가 음악 소비 전환율을 높인다는 마케팅 이론
+## Problem Statement
 
-가설 3: 크로스 플랫폼 상관계수가 0.6 이상일 경우, 통합 프로모션 전략이 단일 플랫폼 전략 대비 효율적이다
-근거: 멀티채널 마케팅의 시너지 효과
+### Business Problem
+1. 신곡 프로모션 시 플랫폼별 예산 배분에 대한 의사결정 근거 부족
+2. Spotify 스트림 수와 YouTube 조회수 간 상관관계 불명확
+3. 히트곡의 오디오 특성을 사전에 파악하지 못해 A&R 의사결정 어려움
 
-3. 실험 설계 (Experiment Design)
-데이터 수집 및 전처리
+### Research Questions
+- Spotify 스트림 수를 사전에 예측할 수 있는가?
+- 어떤 오디오 특성이 크로스 플랫폼 성공에 가장 큰 영향을 미치는가?
+- 공식 뮤직비디오 제작의 실제 ROI는 얼마인가?
 
-데이터셋: Spotify와 YouTube 메타데이터 결합 (20,000+ 트랙)
-변수 설계:
+---
 
-독립변수: Danceability, Energy, Valence, Tempo, Loudness 등 14개 오디오 피처 + YouTube 참여도 지표
-종속변수: Stream(스트림 수), Views(조회수), Engagement Rate(참여율)
+## Hypothesis
 
+### H1: 스트림 예측 가능성
+Spotify 스트림 수는 오디오 특성(댄서빌리티, 에너지, 발렌스)과 YouTube 참여도의 조합으로 70% 이상 예측 가능하다.
+**Rationale**: 선행 연구에서 음악의 감성적 특성이 소비자 선호도와 강한 상관관계를 보임
 
-파생 변수 생성:
+### H2: 공식 뮤직비디오 효과
+공식 뮤직비디오가 있는 트랙은 없는 트랙 대비 평균 스트림 수가 30% 이상 높다.
+**Rationale**: 시각적 콘텐츠가 음악 소비 전환율을 높인다는 마케팅 이론
 
-audio_positivity: (Danceability + Energy + Valence) / 3 → 곡의 긍정적 에너지 지수
-youtube_engagement: (Likes + Comments) / Views → YouTube 팬 충성도
-cross_platform_ratio: Stream / Views → 플랫폼 간 전환율
+### H3: 크로스 플랫폼 시너지
+크로스 플랫폼 상관계수가 0.6 이상일 경우, 통합 프로모션 전략이 단일 플랫폼 전략 대비 효율적이다.
+**Rationale**: 멀티채널 마케팅의 시너지 효과
 
+---
 
+## Methodology
 
-모델링 전략
+### Data Collection & Preprocessing
 
-스트림 예측 모델 (Regression):
+#### Dataset
+- **Source**: Spotify & YouTube integrated dataset
+- **Size**: 20,000+ tracks
+- **Features**: 14 audio features + engagement metrics
 
-Random Forest Regressor (n_estimators=200, max_depth=15)
-로그 변환(log_streams)으로 극단값 처리
-5-Fold Cross Validation으로 과적합 방지
+#### Feature Engineering
+```python
 
-히트곡 분류 모델 (Classification):
-
-상위 10% 스트림을 '히트'로 정의
-Random Forest Classifier로 히트 확률 예측
-
-YouTube 성과 예측 모델 (Regression):
-Spotify 데이터로 YouTube 조회수 역예측 → 크로스 플랫폼 시너지 검증
-
-
-
-실험 환경
-
-MLflow로 실험 트래킹 및 모델 버전 관리
-SQLite로 데이터 웨어하우징
-Streamlit으로 인터랙티브 대시보드 구축
-
-
-4. 검증 (Validation)
-모델 성능
-모델지표결과스트림 예측R² Score0.847 (84.7% 설명력)히트곡 분류Accuracy92.3%YouTube 조회수 예측R² Score0.782
-통계적 검증
-
-Z-Score 기반 이상치 제거: 3-sigma 룰 적용으로 노이즈 20% 감소
-Cross-validation: 평균 R² 0.831 (±0.012) → 모델 안정성 확보
-Feature Importance 분석:
-
-log_views (YouTube 조회수): 중요도 0.285 ← 가장 중요한 변수
-youtube_engagement: 0.187
-audio_positivity: 0.142
-
-비즈니스 지표 검증
-크로스 플랫폼 상관계수: 0.687 (가설 2 검증)
-공식 비디오 리프트 효과: +43.7% (가설 2의 30% 초과 달성)
-평균 참여율: 3.24% (업계 평균 2.1% 대비 54% 높음)
-
-
-5. 결과 및 액션 아이템 (Results & Action)
-핵심 인사이트
-인사이트 1: YouTube 참여도가 높은 트랙은 Spotify에서도 평균 2.3배 더 많은 스트림 발생
-
-액션: YouTube 댓글/좋아요 유도 캠페인을 Spotify 프로모션과 동시 진행
-예상 임팩트: 마케팅 ROI 35% 개선
-
-인사이트 2: 댄서빌리티 0.7 이상 + 에너지 0.8 이상인 트랙이 히트 확률 73% 높음
-
-액션: A&R 팀에 신곡 계약 시 오디오 특성 체크리스트 제공
-예상 임팩트: 히트 발굴률 15% 향상
-
-인사이트 3: 공식 뮤직비디오 제작이 평균 43.7%의 스트림 증가 효과
-
-액션: 뮤직비디오 제작 우선순위 매트릭스 개발 (예측 스트림 × 제작 비용 효율)
-예상 임팩트: 뮤직비디오 제작 예산 20% 절감하면서도 동일한 성과 달성
-
-인사이트 4: 템포 120-130 BPM 구간에서 크로스 플랫폼 시너지 최대화
-
-액션: 플레이리스트 큐레이션 시 템포 기반 세그먼테이션 적용
-
-전략적 제언
-
-통합 프로모션 프레임워크 도입
-
-Spotify 릴리스 1주일 전 YouTube 티저 공개
-두 플랫폼의 참여도 지표를 통합 KPI 대시보드로 모니터링
-
-
-데이터 기반 A&R 의사결정 시스템 구축
-
-신곡 데모를 오디오 분석 API로 자동 평가
-히트 확률 70% 이상인 트랙에 집중 투자
-
-
-뮤직비디오 ROI 최적화 모델 운영
-
-예측 스트림 상위 20% 트랙에만 고예산 뮤직비디오 제작
-나머지는 저비용 라이릭 비디오로 대체
-
-
-
-비즈니스 임팩트 (정량)
-
-예상 연간 마케팅 비용 절감: $2.3M (전체 예산 대비 18%)
-히트곡 발굴 성공률: 62% → 71% (14.5%p 향상)
-크로스 플랫폼 전환율: 8.7% → 12.4% (42% 증가)
-
-기술적 성과
-MLflow 기반 실험 관리: 47개 실험 트래킹, 모델 재현성 100% 확보
-실시간 대시보드 구축: Streamlit으로 경영진 KPI 대시보드 배포 (일 평균 23명 사용)
-모델 배포 파이프라인: Pickle 직렬화로 프로덕션 환경 배포 준비 완료
-데이터 품질 스코어: 97.8% (결측치 처리 자동화)
-
-
-교훈 및 개선점
-배운 점:
-오디오 특성 변수가 예상보다 강력한 예측력을 가짐 (특히 에너지와 댄서빌리티의 조합)
-크로스 플랫폼 데이터 통합 시 시간차 동기화(타임랙) 처리가 중요함
-
-개선 방향:
-소셜미디어(TikTok, Instagram) 바이럴 지표 추가 수집
-시계열 분석 추가 (주차별 스트림 증가율 패턴 분석)
-아티스트 네트워크 분석으로 콜라보레이션 추천 기능 개발
-
-소셜미디어(TikTok, Instagram) 바이럴 지표 추가 수집
-시계열 분석 추가 (주차별 스트림 증가율 패턴 분석)
-아티스트 네트워크 분석으로 콜라보레이션 추천 기능 개발

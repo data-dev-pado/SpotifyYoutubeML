@@ -1,0 +1,39 @@
+{
+  "timestamp": "2025-10-31T21:38:51.075229",
+  "dataset_overview": {
+    "total_tracks": 19376,
+    "unique_artists": 2076,
+    "total_streams": 1774355067032,
+    "total_views": 874786101040,
+    "data_quality_score": 99.69020274675127
+  },
+  "performance_metrics": {
+    "total_tracks": 19376,
+    "total_artists": 2076,
+    "total_streams": 1774355067032.0,
+    "total_views": 874786101040.0,
+    "avg_streams_per_track": 91574889.91701074,
+    "median_streams": 42493028.5,
+    "artist_diversity": 0.10714285714285714,
+    "cross_platform_correlation": 0.4555350018755919,
+    "avg_engagement_rate": 0.012060532343621304,
+    "avg_comment_rate": 0.0004398810288782614,
+    "avg_danceability": 0.6163217227497935,
+    "avg_energy": 0.632408262505161,
+    "avg_valence": 0.5298181905450041,
+    "avg_tempo": 120.67954299132947,
+    "official_video_lift": 0.31396490394233956
+  },
+  "model_performance": {
+    "stream_r2": 0.12732222505697377,
+    "stream_mse": 8.94565798150057,
+    "stream_cv_mean": 0.059509703225274345,
+    "stream_cv_std": 0.044331250678045934,
+    "hit_accuracy": 0.8968008255933952,
+    "hit_precision": 0.8042517207849953,
+    "hit_recall": 0.8968008255933952,
+    "hit_f1": 0.8480086152781943,
+    "youtube_r2": 0.35093415542349327,
+    "youtube_mse": 4.54517347461256
+  }
+}
